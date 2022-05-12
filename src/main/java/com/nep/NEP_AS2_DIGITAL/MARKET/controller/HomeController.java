@@ -1,6 +1,7 @@
 package com.nep.NEP_AS2_DIGITAL.MARKET.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +17,7 @@ import com.nep.NEP_AS2_DIGITAL.MARKET.model.Product;
 @Controller
 public class HomeController {
  @Autowired
- ProductRepository productRepo;	
+ ProductRepository productRepository;	
  
  @RequestMapping(value="/")
  public String home() {
@@ -28,9 +29,21 @@ public class HomeController {
 	 return "addProduct.html";
  }
  
+ @RequestMapping(value="/add/product")
+ public String add(
+		 @RequestParam(required=true) int product_id,
+		 @RequestParam(required=true) String product_name,
+		 @RequestParam(required=true) double product_price,
+		 @RequestParam(required=true) String product_type
+		 ) {
+	 Product product = new Product(product_id, product_name, product_price, product_type);
+	 productRepository.add(product);
+	 return "redirect:/read";
+ }
+ 
  @RequestMapping(value="/update/{ProductID}")
  public String editproduct(@PathVariable int ProductID, ModelMap modelMap) {
-	 Product product = productRepo.findByID(ProductID);
+	 Product product = productRepository.findByID(ProductID);
 	 if(product != null) {
 		 modelMap.put("product", product);
 		 return "editProduct.html";
@@ -46,7 +59,7 @@ public class HomeController {
 		 @RequestParam(required=true) double product_price,
 		 @RequestParam(required=true) String product_type
 		 ) {
-	 Product product = productRepo.findByID(product_id);
+	 Product product = productRepository.findByID(product_id);
 	 product.setName(product_name);
 	 product.setPrice(product_price);
 	 product.setType(product_type);
@@ -65,9 +78,22 @@ public class HomeController {
 	 return "searchProduct.html";
  }
  
+ @RequestMapping(value="/search/product")
+ public String search(@RequestParam(required=false) String productName,
+ModelMap modelMap) {
+ List<Product> products = null;
+ if(productName == null) {
+ products = productRepository.getAllProducts();
+ } else {
+ products = productRepository.findByName(productName);
+ }
+ modelMap.put("products", products);
+	 return "redirect:/read/";
+ }
+ 
  @RequestMapping(value="/delete/{ProductID}")
  public String deleteproduct(@PathVariable int ProductID) {
-	 productRepo.delete(ProductID);
+	 productRepository.delete(ProductID);
 	 return "redirect:/read";
  }
 }

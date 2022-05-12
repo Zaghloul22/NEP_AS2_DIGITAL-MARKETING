@@ -1,14 +1,27 @@
 package com.nep.NEP_AS2_DIGITAL.MARKET.model;
 
+//import javax.persistence.Column;
+//import javax.persistence.Entity;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.GenerationType;
+//import javax.persistence.Id;
+//import javax.persistence.Table;
 
-
+//@EntityScan
+//@Table(name="products")
 public class Product {
 	
-	
+//	 @Id
+//	 @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int ID;
+	//@Column(nullable=false)
 	private String name;
+	//@Column(columnDefinition="DECIMAL(7,2) NOT NULL")
 	private double price;
+	//@Column(nullable=false)
 	private String type;
+	
+	public Product() {}
 	
 	public Product(int ID, String name, double price, String type) {
 		this.ID = ID;

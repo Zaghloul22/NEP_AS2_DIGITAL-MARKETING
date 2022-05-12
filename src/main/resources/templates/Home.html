@@ -1,19 +1,23 @@
 <!DOCTYPE html>
-<!-- TODO -->
-<!-- Slide #19 Example Thymeleaf URL Expression -->
-<!-- Add xml namespace for th to http://www.thymeleaf.org -->
 <html lang="en">
-
 <head>
+<meta charset="UTF-8">
     <title>Home</title>
+    <link th:href="@{'/css/tailwind.min.css'}" rel="stylesheet">
 </head>
 
 <body style="text-align:center;">
-    <h1>NS4306 Network Programming</h1>
+    <div class="min-h-screen h-full flex flex-col">
+        <nav class="flex items-center justify-center flex-wrap bg-gray-700 p-20" navbar-center>
+        <div class="flex items-center flex-shrink-0 text-white mr-6"> 
+    <h1><br>Welcome to</br> <font size="40px">NEP Digital Marketing</font></h1>
+    </div>
+    </nav>
     
-    <a th:href = "@{'/create/'}">Add new product</a>
-    <a th:href = "@{'/read/'}">Product list</a>
-    <a th:href = "@{'/search/'}">Search the product</a>
+    <a th:href = "@{'/create/'}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 border border-gray-700 rounded">Add new product</a>
+    <a th:href = "@{'/read/'}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 border border-gray-700 rounded">Product list</a>
+    <a th:href = "@{'/search/'}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 border border-gray-700 rounded">Search the product</a>
+   </div>
 
 </body>
 
