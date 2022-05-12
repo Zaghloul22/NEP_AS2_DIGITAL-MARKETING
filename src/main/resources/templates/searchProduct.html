@@ -41,23 +41,37 @@
                         <div class="mb-4">
                             <button class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 border border-gray-700 rounded">Search</button>
                         </div>
+                        
+                        <table class="w-full text-left">
+                        <thead class="border border-black bg-gray-300">
+                            <th class="w-6/12 px-2 py-2">Product ID</th>
+                            <th class="w-6/12 px-2 py-2">Name</th>
+                            <th class="w-2/12 px-2 py-2">Price($)</th>
+                            <th class="w-6/12 px-2 py-2">Type</th>
+                            <th class="w-2/12 px-2 py-2">Option</th>
+                        </thead>
+                        <tbody class="bg-gray-100">
+                            <tr class="border-b border-gray-300 hover:bg-white" th:each = "Product :${productslist}">
+                                <th class="px-2 py-2" th:text = "${Product.ID}">-</th>
+                                <th class="px-2 py-2" th:text = "${Product.name}">-</th>
+                                <th class="px-2 py-2" th:text = "${Product.price}">-</th>
+                                <th class="px-2 py-2" th:text = "${Product.type}">-</th>
+                               
+                                <th class="flex justify-between px-2 py-2">
+                                    <a th:href="@{'/update/' + ${Product.ID}}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 border border-gray-700 rounded mr-3">
+                                        Edit
+                                    </a>
+                                    <a th:href="@{'/delete/' + ${Product.ID}}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 border border-gray-700 rounded">
+                                        Delete
+                                    </a>
+                                </th>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                        
                     </form>
                 </div>
-                
-                 <div class="row">
- <div class="col-sm-4 col-lg-4 col-md-4"
-th:each="product : ${ products }">
- <div class="thumbnail">
- <img th:src="${ product.file }" alt="">
- <div class="caption">
- <a th:href="@{'/product/' +
-${product.name}}"><h4 th:text="${ product.name }"></h4></a>
- <h4 th:text="${ product.price }"></h4>
- </div>
- </div>
- </div>
- </div>
-                
             </div>
         </div>
     </div>

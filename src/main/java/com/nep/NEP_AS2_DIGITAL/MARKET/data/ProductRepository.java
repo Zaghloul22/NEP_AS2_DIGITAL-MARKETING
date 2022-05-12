@@ -30,8 +30,8 @@ public class ProductRepository {
 		return null;
 	}
 	
-	 public List<Product> findByName(String name) {
-		 List<Product> products = new ArrayList<Product>();
+	 public List<Product> findContainName(String name) {
+		 List<Product> products = productslist;
 		 for(Product product : productslist) {
 		 if(product.getName().toLowerCase().contains(name.toLowerCase())) {
 		 products.add(product);

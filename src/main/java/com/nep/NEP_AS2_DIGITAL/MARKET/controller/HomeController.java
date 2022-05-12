@@ -68,27 +68,29 @@ public class HomeController {
  
  @RequestMapping(value="/read")
  public String product(ModelMap modelMap) {
-	 ArrayList<Product> productslist = ProductRepository.getAllProducts();
+	 ArrayList<Product> productslist = productRepository.getAllProducts();
 	 modelMap.put("productslist", productslist);
 	 return "Product.html";
  }
  
  @RequestMapping(value="/search")
- public String searchproduct() {
+ public String searchproduct(ModelMap modelMap) {
+	 ArrayList<Product> productslist = productRepository.getAllProducts();
+	 modelMap.put("productslist", productslist);
 	 return "searchProduct.html";
  }
  
- @RequestMapping(value="/search/product")
- public String search(@RequestParam(required=false) String productName,
+ @RequestMapping(value="/search/product/")
+ public String search(@RequestParam(required=true) String product_name,
 ModelMap modelMap) {
  List<Product> products = null;
- if(productName == null) {
+ if(product_name == null) {
  products = productRepository.getAllProducts();
  } else {
- products = productRepository.findByName(productName);
+	 products = productRepository.findContainName(product_name);
  }
  modelMap.put("products", products);
-	 return "redirect:/read/";
+	 return "redirect:/search";
  }
  
  @RequestMapping(value="/delete/{ProductID}")
